@@ -23,7 +23,7 @@ const values = {
   x: getValues(300)
 }
 
-const cols = () => values.x.map(x => <td>1</td> );
+const cols = () => values.x.map(x => <td>{x}</td> );
 
 const rows = () => 
   values.y.map( y => <tr>
