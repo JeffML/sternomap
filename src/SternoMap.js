@@ -25,6 +25,13 @@ const values = {
   x: getValues(34, 30)
 }
 
+const headings = () => {
+  const arr = new Array(30).fill(1);
+  const titles = () => arr.map(a => <th>{casual.letter}{casual.letter}{casual.letter}{casual.letter}{casual.letter}{casual.letter}</th>)
+  // const titles = [<th></th>,<th className="rot">foo</th>,<th>bar</th>,<th>baz</th>]
+  return (<tr><th></th>{titles()}</tr>);
+}
+
 const background = (v) => {
   const rgb = Sterno.getHeatMapColor(v);
   console.log({rgb})
@@ -44,6 +51,7 @@ const SternoMap = () => {
     <div>
       <table>
         <tbody>
+          {headings()}
           {rows()}
         </tbody>
       </table>
