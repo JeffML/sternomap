@@ -25,7 +25,13 @@ const values = {
   x: getValues(3, 30)
 }
 
-const cols = (y) => values.x[y].map(x => <td>{x}</td> );
+const background = (v) => {
+  const rgb = Sterno.getHeatMapColor(v);
+  console.log({rgb})
+  return `rgb(${rgb.red*100}%, ${rgb.green*100}%, ${rgb.blue*100}%)`;
+}
+
+const cols = (y) => values.x[y].map(x => <td><div style={{background: background(x), height:'40px', width: '40px'}}></div></td> );
 
 const rows = () => 
   values.y.map( (y, i) => <tr>
