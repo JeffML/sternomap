@@ -10,24 +10,26 @@ const getNames = (count) => {
   return Array.from(set);
 }
 
-const getValues = (count) => {
-  const arr = [];
-  for (let i = 0; i < count; i++) {
-    arr.push(Math.random())
+const getValues = (ycount, count) => {
+  const arr = new Array(ycount).fill().map(e => []);
+  for (let y = 0; y < ycount; y++) {
+    for (let i = 0; i < count; i++) {
+      arr[y].push(Math.random())
+    }
   }
   return arr;
 }
 
 const values = {
-  y: getNames(30),
-  x: getValues(300)
+  y: getNames(3),
+  x: getValues(3, 30)
 }
 
-const cols = () => values.x.map(x => <td>{x}</td> );
+const cols = (y) => values.x[y].map(x => <td>{x}</td> );
 
 const rows = () => 
-  values.y.map( y => <tr>
-    {cols()}
+  values.y.map( (y, i) => <tr>
+    <td>{y}</td>{cols(i)}
     </tr>
   );
 
