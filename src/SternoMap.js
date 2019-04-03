@@ -5,7 +5,7 @@ import casual from "casual-browserify";
 const getNames = (count) => {
   const set = new Set()
   for (let i = 0; i < count; i++) {
-    set.add(casual.name)
+    set.add(casual.word)
   }
   return Array.from(set);
 }
@@ -21,8 +21,8 @@ const getValues = (ycount, count) => {
 }
 
 const values = {
-  y: getNames(3),
-  x: getValues(3, 30)
+  y: getNames(34),
+  x: getValues(34, 30)
 }
 
 const background = (v) => {
