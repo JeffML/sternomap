@@ -35,5 +35,6 @@
 th {
   font-size: 8pt;
   transform: rotate(-90.0deg);
+  text-align: right;
   padding-bottom: 14px;
 }

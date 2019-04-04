@@ -27,7 +27,7 @@ const values = {
 
 const headings = () => {
   const arr = new Array(30).fill(1);
-  const titles = () => arr.map(a => <th>{casual.letter}{casual.letter}{casual.letter}{casual.letter}{casual.letter}{casual.letter}</th>)
+  const titles = () => arr.map(a => <th>{casual.integer()}</th>)
   // const titles = [<th></th>,<th className="rot">foo</th>,<th>bar</th>,<th>baz</th>]
   return (<tr><th></th>{titles()}</tr>);
 }
