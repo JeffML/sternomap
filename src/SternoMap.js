@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sterno from "./Sterno";
+import Sterno from "jsheatmap";
 import casual from "casual-browserify";
 
 const getNames = (count) => {
@@ -14,36 +14,43 @@ const getValues = (ycount, count) => {
   const arr = new Array(ycount).fill().map(e => []);
   for (let y = 0; y < ycount; y++) {
     for (let i = 0; i < count; i++) {
-      arr[y].push(Math.random())
+      arr[y].push(y + i + 1)
     }
   }
   return arr;
 }
 
-const values = {
-  y: getNames(34),
-  x: getValues(34, 30)
+const input = {
+  labels: getNames(34),
+  values: getValues(34, 30)
 }
 
 const headings = () => {
   const arr = new Array(30).fill(1);
-  const titles = () => arr.map(a => <th>{casual.integer()}</th>)
-  // const titles = [<th></th>,<th className="rot">foo</th>,<th>bar</th>,<th>baz</th>]
+  const titles = () => arr.map((a, i) => <th>{i}</th>)
   return (<tr><th></th>{titles()}</tr>);
 }
 
-const background = (v) => {
-  const rgb = Sterno.getHeatMapColor(v);
-  console.log({rgb})
-  return `rgb(${rgb.red*100}%, ${rgb.green*100}%, ${rgb.blue*100}%)`;
+const heatMap = new Sterno(headings(), input);
+
+const data = heatMap.getData();
+
+const background = (rgb) => {
+  return `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
 }
 
-const cols = (y) => values.x[y].map(x => <td><div style={{background: background(x), height:'40px', width: '40px'}}></div></td> );
+const cols = cells => {
+  return cells.colors.map((c, i) => <td>
+    <div style={{ background: background(c), height: '20px', width: '20px' }}>
+      <span style={{ fontSize: '0.6em' }}>{cells.values[i].toFixed(1)}</span>
+    </div>
+  </td>);
+}
 
-const rows = () => 
-  values.y.map( (y, i) => <tr>
-    <td>{y}</td>{cols(i)}
-    </tr>
+const rows = row =>
+  data.map((row, i) => <tr>
+    <td>{row.name}</td>{cols(row.cells)}
+  </tr>
   );
 
 const SternoMap = () => {
