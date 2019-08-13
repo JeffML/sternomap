@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sterno from "jsheatmap";
 import casual from "casual-browserify";
 
-const getNames = (count) => {
+const getLabels = (count) => {
   const set = new Set()
   for (let i = 0; i < count; i++) {
     set.add(casual.word)
@@ -20,20 +20,23 @@ const getValues = (ycount, count) => {
   return arr;
 }
 
-const input = {
-  labels: getNames(34),
-  values: getValues(34, 30)
-}
+const ROWS = 20;
+const COLS = 20;
 
-const headings = () => {
-  const arr = new Array(30).fill(1);
-  const titles = () => arr.map((a, i) => <th>{i}</th>)
+const labels = getLabels(ROWS)
+const values = getValues(ROWS, COLS)
+const input = labels.map((label, i) => [label, values[i]])
+
+const headings = (headings) => {
+  const titles = () => headings.map(h => <th>{h}</th>)
   return (<tr><th></th>{titles()}</tr>);
 }
 
-const heatMap = new Sterno(headings(), input);
+console.dir(input, { depth: 3 })
+const heatMap = new Sterno([...Array(COLS).keys()], input);
 
 const data = heatMap.getData();
+console.dir(data)
 
 const background = (rgb) => {
   return `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
@@ -41,15 +44,15 @@ const background = (rgb) => {
 
 const cols = cells => {
   return cells.colors.map((c, i) => <td>
-    <div style={{ background: background(c), height: '20px', width: '20px' }}>
-      <span style={{ fontSize: '0.6em' }}>{cells.values[i].toFixed(1)}</span>
+    <div style={{ background: background(c), height: '40px', width: '40px' }}>
+      <span style={{ fontSize: '0.6em' }}>{cells.scales[i].toFixed(1)}</span>
     </div>
   </td>);
 }
 
 const rows = row =>
-  data.map((row, i) => <tr>
-    <td>{row.name}</td>{cols(row.cells)}
+  data.rows.map((row, i) => <tr>
+    <td>{row.label}</td>{cols(row.cells)}
   </tr>
   );
 
@@ -58,7 +61,7 @@ const SternoMap = () => {
     <div>
       <table>
         <tbody>
-          {headings()}
+          {headings(data.headings)}
           {rows()}
         </tbody>
       </table>
