@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sterno from "jsheatmap";
+import Sterno, { Style } from "jsheatmap";
 import casual from "casual-browserify";
 
 const getLabels = (count) => {
@@ -35,6 +35,7 @@ const headings = (headings) => {
 console.dir(input, { depth: 3 })
 const heatMap = new Sterno([...Array(COLS).keys()], input);
 
+// const data = heatMap.getData({ style: Style.SIMPLE });
 const data = heatMap.getData();
 console.dir(data)
 
