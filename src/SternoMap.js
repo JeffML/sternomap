@@ -14,7 +14,7 @@ const getValues = (ycount, count) => {
   const arr = new Array(ycount).fill().map(e => []);
   for (let y = 0; y < ycount; y++) {
     for (let i = 0; i < count; i++) {
-      arr[y].push(y + i + 1)
+      arr[y].push(y + i)
     }
   }
   return arr;
