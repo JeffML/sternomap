@@ -18,7 +18,7 @@ const heatMap = new HeatMap(headings, input);
 
 // const data = heatMap.getData({ style: Style.SIMPLE });
 const data = heatMap.getData();
-console.dir(data, { depth: 4 })
+console.log(JSON.stringify(data, null, 2))
 
 const background = (rgb) => {
   return `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
