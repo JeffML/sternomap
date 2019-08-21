@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import HeatMap, { Style } from "jsheatmap";
-// import { getHeadings, getLabels, getValues } from "./dataSet1"
-import { getHeadings, getLabels, getValues } from "./dataSet2"
+import { getHeadings, getLabels, getValues } from "./dataSet1"
+// import { getHeadings, getLabels, getValues } from "./dataSet2"
 import Headings from './Headings';
 
 
 const headings = getHeadings()
 const labels = getLabels()
 const values = getValues()
-console.dir({ labels, values }, { depth: 3 })
+// console.dir({ labels, values }, { depth: 3 })
 
 const input = labels.map((label, i) => [label, values[i]])
 
@@ -18,7 +18,7 @@ const heatMap = new HeatMap(headings, input);
 
 // const data = heatMap.getData({ style: Style.SIMPLE });
 const data = heatMap.getData();
-console.log(JSON.stringify(data, null, 2))
+// console.log(JSON.stringify(data, null, 2))
 
 const background = (rgb) => {
   return `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
@@ -32,7 +32,7 @@ const cols = cells => {
   </td>);
 }
 
-const rows = row =>
+const Rows = () =>
   data.rows.map((row, i) => <tr key={row.label}>
     <td>{row.label}</td>{cols(row.cells)}
   </tr>
@@ -42,7 +42,7 @@ const HeatMapTable = () =>
   <table>
     <tbody>
       <Headings data={data.headings} />
-      {rows()}
+      <Rows />
     </tbody>
   </table>
 
