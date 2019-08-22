@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import HeatMap, { Style } from "jsheatmap";
-import { getHeadings, getLabels, getValues } from "./dataSet1"
-// import { getHeadings, getLabels, getValues } from "./dataSet2"
+// import { getHeadings, getLabels, getValues } from "./dataSet1"
+import { getHeadings, getLabels, getValues } from "./dataSet2"
 import Headings from './Headings';
 
 
