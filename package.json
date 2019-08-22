@@ -1,9 +1,8 @@
 {
   "name": "heatmaptable",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
-    "jsheatmap": "^1.0.1",
+    "jsheatmap": "^1.0.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "^3.1.0"
